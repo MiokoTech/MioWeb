@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MioNova — Biarkan Penonton Mengontrol Game Kamu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0d14;--bg2:#0f1218;--bg3:#141920;
+  --red:#fe2c55;--red2:#ee1d52;--red-dim:rgba(254,44,85,.18);--red-glow:rgba(254,44,85,.45);
+  --cyan:#00d4ff;--cyan-dim:rgba(0,212,255,.12);--cyan-glow:rgba(0,212,255,.35);
+  --gold:#f0a500;
+  --text:#edf0f8;--text-sub:#7c8da8;--text-dim:#36455e;
+  --border:rgba(255,255,255,.06);--border2:rgba(255,255,255,.1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;cursor:none}
+body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;overflow-x:hidden;line-height:1.6}
+
+/* ── CURSOR ── */
+#cursor{position:fixed;width:20px;height:20px;border:1.5px solid var(--red);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .12s,height .12s,border-color .12s;mix-blend-mode:difference}
+#cursor::after{content:'';position:absolute;top:50%;left:50%;width:4px;height:4px;background:var(--red);border-radius:50%;transform:translate(-50%,-50%)}
+#cursor.hover{width:40px;height:40px;border-color:var(--cyan)}
+#cursor-trail{position:fixed;width:6px;height:6px;background:var(--red);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);opacity:.5;transition:all .08s}
+
+/* ── CANVAS ── */
+#bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+
+/* ── SCANLINES ── */
+.scanlines{position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.04) 2px,rgba(0,0,0,.04) 4px);pointer-events:none;z-index:1;animation:scanMove 8s linear infinite}
+@keyframes scanMove{from{background-position:0 0}to{background-position:0 400px}}
+
+/* ── NOISE ── */
+.noise{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ── LAYOUT ── */
+section{position:relative;z-index:10}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ── HEADER ── */
+header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);backdrop-filter:blur(24px);background:rgba(11,13,20,.7)}
+.logo{font-family:'Orbitron',monospace;font-weight:900;font-size:1.2rem;letter-spacing:2px;color:var(--text)}
+.logo span{color:var(--red)}
+nav{display:flex;gap:32px;align-items:center}
+nav a{font-size:.82rem;font-weight:600;color:var(--text-sub);text-decoration:none;letter-spacing:.5px;text-transform:uppercase;transition:color .2s}
+nav a:hover{color:var(--red)}
+.nav-cta{padding:8px 20px;border-radius:6px;border:1.5px solid var(--red);color:var(--red);font-weight:800;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;transition:all .2s}
+.nav-cta:hover{background:var(--red);color:#fff!important}
+
+/* ── HERO ── */
+#hero{height:100vh;min-height:700px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.4;transform:perspective(600px) rotateX(20deg);transform-origin:center bottom}
+.hero-grid::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(transparent,var(--bg))}
+.hero-center{text-align:center;position:relative;z-index:2}
+.hero-tag{font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--red);letter-spacing:4px;text-transform:uppercase;margin-bottom:24px;opacity:0;animation:fadeUp .8s .3s forwards}
+.hero-tag::before{content:'// '}
+.hero-title{font-family:'Orbitron',monospace;font-size:clamp(3rem,9vw,7.5rem);font-weight:900;line-height:.9;letter-spacing:-2px;margin-bottom:8px;opacity:0;animation:fadeUp .8s .5s forwards}
+.hero-title .line1{display:block;color:var(--text)}
+.hero-title .line2{display:block;color:var(--red);text-shadow:0 0 60px var(--red-glow),0 0 120px rgba(254,44,85,.2);position:relative}
+.hero-title .line2.glitch{animation:glitch 4s 2s infinite}
+@keyframes glitch{0%,95%,100%{clip-path:none;transform:none}96%{clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%);transform:translate(-3px,0)}97%{clip-path:polygon(0 60%,100% 60%,100% 80%,0 80%);transform:translate(3px,0)}98%{clip-path:none;transform:none}}
+.hero-sub{font-size:clamp(1rem,2.5vw,1.35rem);font-weight:300;color:var(--text-sub);max-width:600px;margin:28px auto 0;line-height:1.7;opacity:0;animation:fadeUp .8s .7s forwards}
+.hero-sub strong{color:var(--text);font-weight:600}
+.hero-cta-group{margin-top:48px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .9s forwards}
+.btn-primary{padding:16px 40px;border-radius:4px;border:none;background:var(--red);color:#fff;font-family:'Orbitron',monospace;font-size:.82rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:none;position:relative;overflow:hidden;transition:all .2s;text-decoration:none;display:inline-block}
+.btn-primary::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transition:left .4s}
+.btn-primary:hover::before{left:100%}
+.btn-primary:hover{box-shadow:0 0 40px var(--red-glow),0 0 80px rgba(254,44,85,.15);transform:translateY(-2px)}
+.btn-outline{padding:16px 40px;border-radius:4px;border:1.5px solid var(--border2);color:var(--text-sub);font-family:'Orbitron',monospace;font-size:.82rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:none;transition:all .2s;text-decoration:none;display:inline-block;background:rgba(255,255,255,.03)}
+.btn-outline:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 20px var(--cyan-glow)}
+
+/* ── HERO 3D ORBITER ── */
+.hero-orb-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;pointer-events:none;opacity:.55}
+.orb-ring{position:absolute;top:50%;left:50%;border-radius:50%;border:1px solid;transform-origin:center center;transform:translate(-50%,-50%)}
+.orb-ring1{width:320px;height:320px;border-color:rgba(254,44,85,.25);animation:rotRing1 18s linear infinite}
+.orb-ring2{width:420px;height:420px;border-color:rgba(0,212,255,.15);animation:rotRing2 28s linear infinite reverse}
+.orb-ring3{width:500px;height:500px;border-color:rgba(254,44,85,.1);animation:rotRing1 40s linear infinite}
+@keyframes rotRing1{from{transform:translate(-50%,-50%) rotateX(70deg) rotateZ(0)}to{transform:translate(-50%,-50%) rotateX(70deg) rotateZ(360deg)}}
+@keyframes rotRing2{from{transform:translate(-50%,-50%) rotateX(60deg) rotateY(20deg) rotateZ(0)}to{transform:translate(-50%,-50%) rotateX(60deg) rotateY(20deg) rotateZ(360deg)}}
+.orb-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red-glow)}
+.orb-ring1 .orb-dot{top:-4px;left:50%;transform:translateX(-50%)}
+.orb-ring2 .orb-dot{top:-4px;left:50%;transform:translateX(-50%);background:var(--cyan);box-shadow:0 0 12px var(--cyan-glow)}
+.orb-ring2 .orb-dot2{bottom:-4px;left:50%;position:absolute;width:8px;height:8px;border-radius:50%;transform:translateX(-50%);background:var(--red);box-shadow:0 0 12px var(--red-glow)}
+
+/* HUD corners */
+.hud{position:absolute;pointer-events:none;opacity:0;animation:fadeIn 1s 1.2s forwards}
+.hud-tl{top:80px;left:0;width:120px;height:80px;border-left:2px solid var(--red);border-top:2px solid var(--red)}
+.hud-tr{top:80px;right:0;width:120px;height:80px;border-right:2px solid var(--red);border-top:2px solid var(--red)}
+.hud-bl{bottom:0;left:0;width:120px;height:80px;border-left:2px solid var(--cyan);border-bottom:2px solid var(--cyan)}
+.hud-br{bottom:0;right:0;width:120px;height:80px;border-right:2px solid var(--cyan);border-bottom:2px solid var(--cyan)}
+.hud-text{font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--red);letter-spacing:2px;position:absolute;white-space:nowrap}
+.hud-tl .hud-text{top:8px;left:8px}
+.hud-tr .hud-text{top:8px;right:8px}
+.hud-bl .hud-text{bottom:8px;left:8px;color:var(--cyan)}
+.hud-br .hud-text{bottom:8px;right:8px;color:var(--cyan)}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+
+/* scroll indicator */
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);opacity:0;animation:fadeIn 1s 1.5s forwards;text-align:center}
+.scroll-hint span{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--text-dim);letter-spacing:3px;display:block;margin-bottom:10px;text-transform:uppercase}
+.scroll-line{width:1px;height:50px;background:linear-gradient(var(--red),transparent);margin:0 auto;animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}}
+
+/* ── SECTION DIVIDER ── */
+.section-divider{height:1px;background:linear-gradient(90deg,transparent,var(--red),var(--cyan),transparent);margin:0;opacity:.4}
+
+/* ── SECTION COMMON ── */
+.section-label{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+.section-label::before{content:'[ '}
+.section-label::after{content:' ]'}
+.section-title{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,4vw,3rem);font-weight:900;letter-spacing:-1px;line-height:1.1;margin-bottom:16px}
+.section-title em{color:var(--red);font-style:normal}
+.section-desc{font-size:1rem;color:var(--text-sub);max-width:560px;line-height:1.8;font-weight:300}
+
+/* ── FEATURES ── */
+#features{padding:120px 0}
+.features-header{text-align:center;margin-bottom:80px}
+.features-header .section-desc{margin:0 auto}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;position:relative}
+.feat-card{background:var(--bg2);padding:48px 36px;position:relative;overflow:hidden;transition:all .3s;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px))}
+.feat-card::before{content:'';position:absolute;top:0;right:0;width:20px;height:20px;background:linear-gradient(135deg,transparent 50%,var(--red) 50%);opacity:.6;transition:opacity .3s}
+.feat-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--red-dim),transparent 60%);opacity:0;transition:opacity .3s}
+.feat-card:hover{background:var(--bg3);transform:translateY(-4px)}
+.feat-card:hover::after{opacity:1}
+.feat-card:hover::before{opacity:1}
+.feat-icon{width:56px;height:56px;margin-bottom:28px;position:relative;z-index:1}
+.feat-icon svg{width:100%;height:100%}
+.feat-num{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--text-dim);letter-spacing:3px;margin-bottom:16px;position:relative;z-index:1}
+.feat-title{font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:700;margin-bottom:14px;letter-spacing:.5px;position:relative;z-index:1}
+.feat-desc{font-size:.9rem;color:var(--text-sub);line-height:1.75;font-weight:300;position:relative;z-index:1}
+.feat-line{position:absolute;bottom:0;left:0;height:2px;background:linear-gradient(90deg,var(--red),transparent);width:0;transition:width .4s}
+.feat-card:hover .feat-line{width:100%}
+
+/* pulse icon animation */
+@keyframes iconPulse{0%,100%{filter:drop-shadow(0 0 4px var(--red))}50%{filter:drop-shadow(0 0 16px var(--red-glow))}}
+.feat-card:hover .feat-icon{animation:iconPulse 1.5s ease-in-out infinite}
+
+/* ── HOW IT WORKS ── */
+#how{padding:120px 0;overflow:hidden}
+.how-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.how-left{}
+.how-steps{margin-top:56px;display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:28px;padding:28px 0;border-bottom:1px solid var(--border);position:relative;opacity:.4;transition:opacity .3s}
+.step.active{opacity:1}
+.step-num{font-family:'Orbitron',monospace;font-size:2.5rem;font-weight:900;color:var(--text-dim);line-height:1;flex-shrink:0;width:60px;transition:color .3s}
+.step.active .step-num{color:var(--red);text-shadow:0 0 20px var(--red-glow)}
+.step-content{}
+.step-title{font-family:'Orbitron',monospace;font-size:1rem;font-weight:700;margin-bottom:8px;letter-spacing:.5px}
+.step-desc{font-size:.88rem;color:var(--text-sub);line-height:1.7;font-weight:300}
+.step-bar{position:absolute;left:0;bottom:0;height:1px;background:var(--red);width:0;transition:width 3s linear}
+.step.active .step-bar{width:100%}
+
+/* right side visual */
+.how-visual{position:relative;height:500px}
+.how-screen{position:absolute;inset:0;border:1px solid var(--border2);border-radius:8px;overflow:hidden;background:var(--bg2)}
+.how-screen-header{height:36px;background:var(--bg3);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:8px}
+.how-dot{width:10px;height:10px;border-radius:50%}
+.how-dot:nth-child(1){background:#fe5f57}
+.how-dot:nth-child(2){background:#febc2e}
+.how-dot:nth-child(3){background:#28c840}
+.how-content{padding:24px;height:calc(100% - 36px);display:flex;flex-direction:column;gap:16px;overflow:hidden}
+.event-feed{display:flex;flex-direction:column;gap:8px}
+.event-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:6px;background:rgba(255,255,255,.03);border-left:3px solid var(--red);font-family:'Share Tech Mono',monospace;font-size:.75rem;opacity:0;transform:translateX(-20px);transition:all .4s}
+.event-item.show{opacity:1;transform:none}
+.event-item .ei-gift{color:var(--gold);font-size:1rem}
+.event-item .ei-arrow{color:var(--text-dim)}
+.event-item .ei-action{color:var(--cyan)}
+.event-item .ei-user{color:var(--red)}
+.event-item .ei-ts{color:var(--text-dim);margin-left:auto;font-size:.65rem}
+
+/* ── PRICING ── */
+#pricing{padding:120px 0}
+.pricing-header{text-align:center;margin-bottom:80px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:1000px;margin:0 auto}
+.price-card{background:var(--bg2);padding:48px 36px;position:relative;overflow:hidden;transition:all .3s}
+.price-card.featured{background:var(--bg3);border-top:3px solid var(--red)}
+.price-card.featured::after{content:'POPULER';position:absolute;top:20px;right:-24px;background:var(--red);color:#fff;font-family:'Orbitron',monospace;font-size:.55rem;font-weight:700;letter-spacing:2px;padding:4px 32px;transform:rotate(45deg)}
+.price-tier{font-family:'Orbitron',monospace;font-size:.65rem;letter-spacing:4px;color:var(--text-dim);text-transform:uppercase;margin-bottom:20px}
+.price-tier.gold{color:var(--gold)}
+.price-tier.red{color:var(--red)}
+.price-tier.cyan{color:var(--cyan)}
+.price-amount{font-family:'Orbitron',monospace;font-size:2.2rem;font-weight:900;letter-spacing:-1px;margin-bottom:4px;line-height:1}
+.price-amount .currency{font-size:1rem;vertical-align:top;margin-top:6px;display:inline-block;font-weight:400;color:var(--text-sub)}
+.price-period{font-size:.78rem;color:var(--text-dim);font-family:'Share Tech Mono',monospace;margin-bottom:32px}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:40px}
+.price-features li{font-size:.88rem;color:var(--text-sub);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.price-features li::before{content:'▶';color:var(--red);font-size:.55rem;margin-top:4px;flex-shrink:0}
+.price-features li.dim::before{color:var(--text-dim)}
+.price-features li.dim{color:var(--text-dim);text-decoration:line-through}
+.price-btn{width:100%;padding:14px;border-radius:4px;font-family:'Orbitron',monospace;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:none;transition:all .2s;border:1.5px solid var(--border2);background:transparent;color:var(--text-sub)}
+.price-btn.primary-btn{background:var(--red);border-color:var(--red);color:#fff}
+.price-btn.primary-btn:hover{box-shadow:0 0 30px var(--red-glow);transform:translateY(-2px)}
+.price-btn:hover{border-color:var(--text-sub);color:var(--text)}
+
+/* ── STATS ── */
+#stats{padding:80px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.stat{text-align:center;padding:40px 20px}
+.stat-num{font-family:'Orbitron',monospace;font-size:2.8rem;font-weight:900;letter-spacing:-2px;color:var(--text);line-height:1;margin-bottom:8px}
+.stat-num span{color:var(--red)}
+.stat-label{font-size:.78rem;color:var(--text-sub);font-family:'Share Tech Mono',monospace;letter-spacing:2px;text-transform:uppercase}
+
+/* ── FOOTER ── */
+footer{padding:60px 0 40px;border-top:1px solid var(--border)}
+.footer-inner{display:grid;grid-template-columns:1fr auto;gap:60px;align-items:start;margin-bottom:48px}
+.footer-brand{}
+.footer-logo{font-family:'Orbitron',monospace;font-weight:900;font-size:1.4rem;letter-spacing:2px;margin-bottom:12px}
+.footer-logo span{color:var(--red)}
+.footer-tagline{font-size:.85rem;color:var(--text-sub);font-weight:300;max-width:320px;line-height:1.7}
+.footer-links{display:flex;gap:48px}
+.footer-col h4{font-family:'Orbitron',monospace;font-size:.65rem;letter-spacing:3px;color:var(--text-sub);text-transform:uppercase;margin-bottom:20px}
+.footer-col a{display:block;font-size:.85rem;color:var(--text-dim);text-decoration:none;margin-bottom:10px;transition:color .2s}
+.footer-col a:hover{color:var(--red)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:28px}
+.footer-copy{font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--text-dim);letter-spacing:2px}
+.footer-badges{display:flex;gap:12px}
+.badge{font-family:'Share Tech Mono',monospace;font-size:.6rem;padding:4px 10px;border:1px solid var(--border2);color:var(--text-dim);letter-spacing:1px}
+
+/* ── REVEAL ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .8s ease,transform .8s ease}
+.reveal-left.visible{opacity:1;transform:none}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .8s ease,transform .8s ease}
+.reveal-right.visible{opacity:1;transform:none}
+.delay-1{transition-delay:.1s}
+.delay-2{transition-delay:.2s}
+.delay-3{transition-delay:.3s}
+.delay-4{transition-delay:.4s}
+.delay-5{transition-delay:.5s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{display:none}
+  .features-grid,.pricing-grid{grid-template-columns:1fr}
+  .how-inner{grid-template-columns:1fr}
+  .how-visual{display:none}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-inner{grid-template-columns:1fr}
+  .footer-links{flex-wrap:wrap;gap:32px}
+  .hero-orb-wrap{width:300px;height:300px}
+  .orb-ring1{width:200px;height:200px}
+  .orb-ring2{width:260px;height:260px}
+  .orb-ring3{width:300px;height:300px}
+  .hud-tl,.hud-tr{display:none}
+}
+@media(max-width:600px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  header{padding:12px 20px}
+  .container{padding:0 16px}
+  .btn-primary,.btn-outline{padding:13px 24px;font-size:.72rem}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
+<canvas id="bg-canvas"></canvas>
+<div class="scanlines"></div>
+<div class="noise"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">Mio<span>Nova</span></div>
+  <nav>
+    <a href="#features">Fitur</a>
+    <a href="#how">Cara Kerja</a>
+    <a href="#pricing">Harga</a>
+    <a href="#pricing" class="nav-cta">Download</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-orb-wrap">
+    <div class="orb-ring orb-ring1"><div class="orb-dot"></div></div>
+    <div class="orb-ring orb-ring2"><div class="orb-dot"></div><div class="orb-dot2"></div></div>
+    <div class="orb-ring orb-ring3"><div class="orb-dot"></div></div>
+  </div>
+  <div class="hud hud-tl"><div class="hud-text">SYS:ACTIVE</div></div>
+  <div class="hud hud-tr"><div class="hud-text">VER:1.5.1</div></div>
+  <div class="hud hud-bl"><div class="hud-text">STREAM:ONLINE</div></div>
+  <div class="hud hud-br"><div class="hud-text">LATENCY:&lt;8MS</div></div>
+  <div class="hero-center container">
+    <div class="hero-tag">GTA V × TikTok Live — Real-time Interaction System</div>
+    <h1 class="hero-title">
+      <span class="line1">MIO</span>
+      <span class="line2 glitch">NOVA</span>
+    </h1>
+    <p class="hero-sub">
+      Biarkan penonton <strong>mengontrol game kamu</strong> secara langsung.<br>
+      Gift TikTok → aksi nyata di GTA V. <em style="color:var(--red)">Real-time. Otomatis. Brutal.</em>
+    </p>
+    <div class="hero-cta-group">
+      <a href="#pricing" class="btn-primary">Download Gratis</a>
+      <a href="#how" class="btn-outline">Lihat Demo</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat reveal">
+        <div class="stat-num"><span id="cnt-events">0</span>+</div>
+        <div class="stat-label">Event per Menit</div>
+      </div>
+      <div class="stat reveal delay-1">
+        <div class="stat-num"><span id="cnt-commands">0</span></div>
+        <div class="stat-label">Game Commands</div>
+      </div>
+      <div class="stat reveal delay-2">
+        <div class="stat-num">&lt;<span id="cnt-latency">0</span>ms</div>
+        <div class="stat-label">Latensi Response</div>
+      </div>
+      <div class="stat reveal delay-3">
+        <div class="stat-num"><span id="cnt-streamer">0</span>+</div>
+        <div class="stat-label">Streamer Aktif</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div class="features-header reveal">
+      <div class="section-label">Kapabilitas</div>
+      <h2 class="section-title">Semua yang Kamu Butuh<br>untuk <em>Streaming Epik</em></h2>
+      <p class="section-desc">Dari gift pertama sampai aksi terakhir — semuanya terjadi dalam hitungan milidetik.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card reveal delay-1">
+        <div class="feat-num">01 / CORE</div>
+        <div class="feat-icon">
+          <svg viewBox="0 0 56 56" fill="none">
+            <circle cx="28" cy="28" r="27" stroke="#fe2c55" stroke-width="1.5" stroke-dasharray="4 4"/>
+            <path d="M14 28h28M28 14l14 14-14 14" stroke="#fe2c55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="14" cy="28" r="4" fill="#fe2c55"/>
+            <circle cx="42" cy="28" r="4" fill="#00d4ff"/>
+          </svg>
+        </div>
+        <h3 class="feat-title">Gift → Game Action</h3>
+        <p class="feat-desc">Setiap gift TikTok memicu aksi langsung di GTA V — spawn musuh, ledakan, chaos mode. Penonton yang menentukan nasib kamu.</p>
+        <div class="feat-line"></div>
+      </div>
+      <div class="feat-card reveal delay-2">
+        <div class="feat-num">02 / OVERLAY</div>
+        <div class="feat-icon">
+          <svg viewBox="0 0 56 56" fill="none">
+            <rect x="4" y="12" width="48" height="32" rx="3" stroke="#fe2c55" stroke-width="1.5"/>
+            <rect x="10" y="18" width="36" height="20" rx="2" fill="rgba(254,44,85,.08)" stroke="rgba(254,44,85,.3)" stroke-width="1"/>
+            <path d="M15 28h6M15 32h10M32 22h9M32 26h7" stroke="#00d4ff" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="36" cy="22" r="5" stroke="#fe2c55" stroke-width="1.5"/>
+            <path d="M34 22l1.5 1.5L38 20" stroke="#fe2c55" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="feat-title">Overlay Studio OBS</h3>
+        <p class="feat-desc">11 widget overlay siap pakai — goal bar, gift top, spinner roulette, chat feed. Drag & drop langsung ke browser source OBS.</p>
+        <div class="feat-line"></div>
+      </div>
+      <div class="feat-card reveal delay-3">
+        <div class="feat-num">03 / AUTOMATION</div>
+        <div class="feat-icon">
+          <svg viewBox="0 0 56 56" fill="none">
+            <path d="M10 28L28 10l18 18-18 18L10 28Z" stroke="#fe2c55" stroke-width="1.5"/>
+            <path d="M22 28h12M28 22v12" stroke="#00d4ff" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="28" cy="28" r="5" fill="rgba(254,44,85,.2)" stroke="#fe2c55" stroke-width="1"/>
+            <path d="M8 20v-8h8M48 20v-8h-8M8 36v8h8M48 36v8h-8" stroke="rgba(254,44,85,.4)" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="feat-title">Hook System</h3>
+        <p class="feat-desc">Webhook, suara, keystroke, dan game command untuk setiap event — gift, like, follow, share. Cooldown, min koin, combo filter.</p>
+        <div class="feat-line"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <div class="how-inner">
+      <div class="how-left">
+        <div class="reveal">
+          <div class="section-label">Mekanisme</div>
+          <h2 class="section-title">Dari Gift ke <em>Ledakan</em><br>dalam 8ms</h2>
+          <p class="section-desc">Pipeline real-time yang memproses setiap event TikTok dan mengeksekusi aksi di game tanpa delay.</p>
+        </div>
+        <div class="how-steps" id="howSteps">
+          <div class="step active" data-step="0">
+            <div class="step-num">01</div>
+            <div class="step-content">
+              <div class="step-title">Penonton Kirim Gift</div>
+              <p class="step-desc">Penonton TikTok mengirim gift apapun — dari Rose 1 koin sampai Lion 30.000 koin. Setiap gift punya efek berbeda.</p>
+            </div>
+            <div class="step-bar"></div>
+          </div>
+          <div class="step" data-step="1">
+            <div class="step-num">02</div>
+            <div class="step-content">
+              <div class="step-title">MioNova Proses Real-time</div>
+              <p class="step-desc">Engine cloud MioNova mencocokkan gift dengan konfigurasi hook kamu, menjalankan webhook, suara, dan game command dalam milidetik.</p>
+            </div>
+            <div class="step-bar"></div>
+          </div>
+          <div class="step" data-step="2">
+            <div class="step-num">03</div>
+            <div class="step-content">
+              <div class="step-title">Aksi Terjadi di GTA V</div>
+              <p class="step-desc">Tank muncul, musuh spawn, chaos mode aktif — semua terjadi langsung di game. Penonton melihat efeknya di stream secara real-time.</p>
+            </div>
+            <div class="step-bar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="how-visual reveal-right">
+        <div class="how-screen">
+          <div class="how-screen-header">
+            <div class="how-dot"></div>
+            <div class="how-dot"></div>
+            <div class="how-dot"></div>
+            <span style="font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--text-dim);margin-left:8px">MioNova — Event Feed</span>
+          </div>
+          <div class="how-content">
+            <div class="event-feed" id="eventFeed">
+              <!-- injected by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="pricing-header reveal">
+      <div class="section-label">Paket Lisensi</div>
+      <h2 class="section-title">Pilih Level <em>Kekacauan</em><br>yang Kamu Mau</h2>
+      <p class="section-desc" style="margin:0 auto">Semua paket include akses permanen. Tidak ada biaya bulanan. Bayar sekali, main selamanya.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal delay-1">
+        <div class="price-tier">Recruit</div>
+        <div class="price-amount"><span class="currency">Rp</span>250<span style="font-size:1.2rem;font-weight:400">.000</span></div>
+        <div class="price-period">// PAKET DASAR — SELAMANYA</div>
+        <ul class="price-features">
+          <li>Akses Mod Dasar GTA V</li>
+          <li>16 Gift Mapper Slot</li>
+          <li>Pembaruan Otomatis</li>
+          <li class="dim">Chaos Interaksi Penuh</li>
+          <li class="dim">Overlay Studio</li>
+          <li class="dim">Pengelola Mod</li>
+        </ul>
+        <button class="price-btn">Pilih Paket</button>
+      </div>
+      <div class="price-card featured reveal delay-2">
+        <div class="price-tier red">Operative</div>
+        <div class="price-amount"><span class="currency">Rp</span>1<span style="font-size:1rem;font-weight:400">jt</span></div>
+        <div class="price-period">// PALING BANYAK DIPILIH — SELAMANYA</div>
+        <ul class="price-features">
+          <li>Semua Fitur Dasar</li>
+          <li>Chaos Interaksi TikTok Live</li>
+          <li>Unlimited Gift Mapper</li>
+          <li>Overlay Studio (11 widget)</li>
+          <li>Pengelola Mod + AddonPeds</li>
+          <li style="color:var(--gold)">+14 Hari Live Connect Bonus</li>
+        </ul>
+        <button class="price-btn primary-btn">Pilih Paket</button>
+      </div>
+      <div class="price-card reveal delay-3">
+        <div class="price-tier cyan">Commander</div>
+        <div class="price-amount"><span class="currency">Rp</span>1.5<span style="font-size:1rem;font-weight:400">jt</span></div>
+        <div class="price-period">// SEMUA FITUR — SELAMANYA</div>
+        <ul class="price-features">
+          <li>Semua Fitur Operative</li>
+          <li>Hemat 25% dari Harga Normal</li>
+          <li>Alat Aset Visual</li>
+          <li>50% Diskon Mod Lain</li>
+          <li style="color:var(--gold)">+35 Hari Live Connect Bonus</li>
+          <li>Prioritas Support Admin</li>
+        </ul>
+        <button class="price-btn">Pilih Paket</button>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px;opacity:0;animation:fadeIn 1s 1s forwards">
+      <p style="font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--text-dim);letter-spacing:2px">
+        // SEMUA PEMBELIAN FINAL · TIDAK ADA PENGEMBALIAN DANA · LISENSI TERIKAT PADA 1 AKUN GOOGLE
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">Mio<span>Nova</span></div>
+        <p class="footer-tagline">Sistem interaksi TikTok Live untuk GTA V streamer. Buat penonton takjub, buat game jadi medan perang.</p>
+        <div style="margin-top:20px;display:flex;gap:12px">
+          <div class="badge">WINDOWS</div>
+          <div class="badge">GTA V</div>
+          <div class="badge">TIKTOK LIVE</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Produk</h4>
+          <a href="#features">Fitur</a>
+          <a href="#how">Cara Kerja</a>
+          <a href="#pricing">Harga</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="#">Discord</a>
+          <a href="#">WhatsApp Admin</a>
+          <a href="#">Dokumentasi</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 MiokoTech. All rights reserved. // v1.5.1</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--text-dim);letter-spacing:2px">MIOKOTECH.COM</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── CURSOR ──────────────────────────────────────────────────────────────────
+const cursor = document.getElementById('cursor');
+const trail  = document.getElementById('cursor-trail');
+let mx=0,my=0,tx=0,ty=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cursor.style.left=mx+'px';cursor.style.top=my+'px';
+});
+setInterval(()=>{
+  tx+=(mx-tx)*.25;ty+=(my-ty)*.25;
+  trail.style.left=tx+'px';trail.style.top=ty+'px';
+},16);
+document.querySelectorAll('a,button,.feat-card,.price-card,.step').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cursor.classList.add('hover'));
+  el.addEventListener('mouseleave',()=>cursor.classList.remove('hover'));
+});
+
+// ── CANVAS PARTICLES ─────────────────────────────────────────────────────────
+const canvas=document.getElementById('bg-canvas');
+const ctx=canvas.getContext('2d');
+let W,H,particles=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+window.addEventListener('resize',resize);resize();
+
+class Particle{
+  constructor(){this.reset();}
+  reset(){
+    this.x=Math.random()*W;this.y=Math.random()*H;
+    this.size=Math.random()*1.5+.3;
+    this.speed=Math.random()*.3+.05;
+    this.angle=Math.random()*Math.PI*2;
+    this.drift=Math.random()*.01-.005;
+    this.alpha=Math.random()*.6+.1;
+    this.color=Math.random()<.15?'0,212,255':'254,44,85';
+  }
+  update(){
+    this.angle+=this.drift;
+    this.x+=Math.cos(this.angle)*this.speed;
+    this.y-=this.speed*.5;
+    if(this.y<-5)this.reset(),this.y=H+5;
+    if(this.x<-5||this.x>W+5)this.reset();
+  }
+  draw(){
+    ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+    ctx.fillStyle=`rgba(${this.color},${this.alpha})`;ctx.fill();
+  }
+}
+
+for(let i=0;i<200;i++)particles.push(new Particle());
+
+// shooting stars
+class Star{
+  constructor(){this.reset();}
+  reset(){
+    this.x=Math.random()*W;this.y=Math.random()*H*.5;
+    this.len=Math.random()*80+40;
+    this.speed=Math.random()*8+4;
+    this.alpha=0;this.life=0;this.maxLife=60+Math.random()*60;
+  }
+  update(){
+    this.life++;
+    if(this.life<10)this.alpha=this.life/10;
+    else if(this.life>this.maxLife-10)this.alpha=(this.maxLife-this.life)/10;
+    this.x+=this.speed*.7;this.y+=this.speed*.4;
+    if(this.life>this.maxLife)this.reset();
+  }
+  draw(){
+    const grd=ctx.createLinearGradient(this.x,this.y,this.x-this.len*.7,this.y-this.len*.4);
+    grd.addColorStop(0,`rgba(254,44,85,${this.alpha})`);
+    grd.addColorStop(1,'transparent');
+    ctx.beginPath();ctx.moveTo(this.x,this.y);ctx.lineTo(this.x-this.len*.7,this.y-this.len*.4);
+    ctx.strokeStyle=grd;ctx.lineWidth=1.5;ctx.stroke();
+  }
+}
+const stars=[];
+for(let i=0;i<3;i++){const s=new Star();s.life=Math.random()*s.maxLife;stars.push(s);}
+
+function animate(){
+  ctx.clearRect(0,0,W,H);
+  particles.forEach(p=>{p.update();p.draw();});
+  stars.forEach(s=>{s.update();s.draw();});
+  requestAnimationFrame(animate);
+}
+animate();
+
+// ── HERO PARALLAX ────────────────────────────────────────────────────────────
+const heroOrb=document.querySelector('.hero-orb-wrap');
+document.addEventListener('mousemove',e=>{
+  const rx=(e.clientX/W-.5)*20;
+  const ry=(e.clientY/H-.5)*12;
+  heroOrb.style.transform=`translate(calc(-50% + ${rx}px),calc(-50% + ${ry}px))`;
+});
+
+// ── SCROLL REVEAL ─────────────────────────────────────────────────────────────
+const revealEls=document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.15});
+revealEls.forEach(el=>observer.observe(el));
+
+// ── COUNT UP ─────────────────────────────────────────────────────────────────
+function countUp(el,target,duration=1800,suffix=''){
+  let start=0,step=target/60,startTime=null;
+  function frame(ts){
+    if(!startTime)startTime=ts;
+    const p=Math.min((ts-startTime)/duration,1);
+    const val=Math.floor(p*target);
+    el.textContent=val.toLocaleString()+suffix;
+    if(p<1)requestAnimationFrame(frame);
+    else el.textContent=target.toLocaleString()+suffix;
+  }
+  requestAnimationFrame(frame);
+}
+const statsObs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting){
+    countUp(document.getElementById('cnt-events'),500);
+    countUp(document.getElementById('cnt-commands'),35);
+    countUp(document.getElementById('cnt-latency'),8);
+    countUp(document.getElementById('cnt-streamer'),200);
+    statsObs.disconnect();
+  }
+},{threshold:.3});
+statsObs.observe(document.getElementById('stats'));
+
+// ── HOW IT WORKS — STEP CYCLING ───────────────────────────────────────────────
+const steps=document.querySelectorAll('.step');
+let currentStep=0,stepTimer=null;
+
+function activateStep(i){
+  steps.forEach((s,idx)=>{
+    s.classList.toggle('active',idx===i);
+    const bar=s.querySelector('.step-bar');
+    bar.style.transition='none';bar.style.width='0';
+    if(idx===i){void bar.offsetWidth;bar.style.transition='width 3s linear';bar.style.width='100%';}
+  });
+  currentStep=i;
+}
+
+function nextStep(){
+  activateStep((currentStep+1)%steps.length);
+  stepTimer=setTimeout(nextStep,3200);
+}
+
+const howObs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting){
+    activateStep(0);
+    stepTimer=setTimeout(nextStep,3200);
+  } else {
+    clearTimeout(stepTimer);
+  }
+},{threshold:.3});
+howObs.observe(document.getElementById('how'));
+
+steps.forEach((s,i)=>{
+  s.addEventListener('click',()=>{clearTimeout(stepTimer);activateStep(i);stepTimer=setTimeout(nextStep,3200);});
+});
+
+// ── EVENT FEED ANIMATION ──────────────────────────────────────────────────────
+const events=[
+  {user:'xXstreamer99',gift:'🌹 Rose',action:'Spawn 1 Enemy',coins:1},
+  {user:'penonton_asik',gift:'🥊 Boxing Gloves',action:'Chaos Mode +',coins:299},
+  {user:'real_sultan',gift:'🦁 Lion',action:'Spawn TANK + Heli',coins:29999},
+  {user:'wkwk_land',gift:'🌌 Galaxy',action:'Boss Mode Activated',coins:1000},
+  {user:'pro_viewer',gift:'🎉 Confetti',action:'Respawn Player',coins:100},
+  {user:'gift_rain_go',gift:'🐕 Corgi',action:'Enemy Group 1',coins:299},
+];
+const feed=document.getElementById('eventFeed');
+
+function spawnEvent(ev){
+  const d=document.createElement('div');
+  d.className='event-item';
+  d.innerHTML=`<span class="ei-user">@${ev.user}</span><span class="ei-gift">${ev.gift}</span><span class="ei-arrow">→</span><span class="ei-action">${ev.action}</span><span class="ei-ts">${ev.coins.toLocaleString()} koin</span>`;
+  feed.appendChild(d);
+  setTimeout(()=>d.classList.add('show'),50);
+  const items=feed.querySelectorAll('.event-item');
+  if(items.length>5)items[0].remove();
+}
+
+let evIdx=0;
+const feedObs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting){
+    spawnEvent(events[evIdx%events.length]);evIdx++;
+    setInterval(()=>{spawnEvent(events[evIdx%events.length]);evIdx++;},1800);
+    feedObs.disconnect();
+  }
+},{threshold:.3});
+feedObs.observe(document.getElementById('how'));
+</script>
+</body>
+</html>
