@@ -1,3 +1,889 @@
-{"ts":"2026-07-16T18:18:19.789Z","level":"error","message":"dependency visual install failed","category":"installer","phase":"dependency_visual","installRunId":"30ecaf05","gameId":"gtav","package":"Install - NVA 2.0.oiv","error":"Command failed: C:\\Users\\PERSONAL\\AppData\\Local\\Programs\\MioNova\\resources\\MiokoRpfEngine.exe install-oiv C:\\Grand Theft Auto V C:\\Grand Theft Auto V\\Install - NVA 2.0.oiv\n","outputTail":"atch/data/effects/ptfx_lo.rpf: Could not find a part of the path 'c:\\grand theft auto v\\mods\\update\\update.rpf\\x64\\patch\\data\\effects\\ptfx_lo.rpf'.\r\nINF_ARCHIVE_DONE: update/update.rpf ok=0 fail=1 skip=0\r\nINF_OPENING_ARCHIVE: C:\\Grand Theft Auto V\\mods\\update\\update.rpf\r\nERR_NESTED_ARCHIVE_CREATE_FAILED: x64/patch/data/effects/ptfx_hi.rpf: Could not find a part of the path 'c:\\grand theft auto v\\mods\\update\\update.rpf\\x64\\patch\\data\\effects\\ptfx_hi.rpf'.\r\nINF_ARCHIVE_DONE: update/update.rpf ok=0..."}
-{"ts":"2026-07-16T18:18:19.789Z","level":"error","message":"install failed","category":"installer","phase":"failed","installRunId":"30ecaf05","gameId":"gtav","error":"Gagal memasang paket NVA.","stack":"Error: Gagal memasang paket NVA.\n    at installExtractedDependencyOiv (C:\\snapshot\\mod-manager-backend\\routes\\install.js)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async runInstall (C:\\snapshot\\mod-manager-backend\\routes\\install.js)","userMessage":"Failed to install the NVA visual package. Close GTA V & OpenIV, then try again."}
-{"ts":"2026-07-16T18:18:19.792Z","level":"warn","message":"[Backend] [Install] Gagal memasang paket NVA.\n"}
+--------------------------------------------------------------------------------
+
+	Start: 17/07/2026 01:24:29
+	ThreadID: 2976
+	OS: Windows 10 Enterprise (6.3.26200, 64-bit)
+	Path: C:\Users\PERSONAL\AppData\Local\New Technology Studio\Apps\OpenIV\OpenIV.exe
+
+--------------------------------------------------------------------------------
+[17/07/2026 01:24:29] [2976] INFO  -> Current GameId: "Five"
+[17/07/2026 01:24:29] [2976] INFO  -> Current GamePlatform: "pc"
+[17/07/2026 01:24:29] [2976] INFO  -> Current GamePath: "C:\Grand Theft Auto V\"
+[17/07/2026 01:24:30] [10788] INFO  -> Loading package
+[17/07/2026 01:24:30] [10788] INFO  -> Loading package from "F:\NVA 2.0 - 0.1.012\Install - NVA 2.0.oiv"
+[17/07/2026 01:24:30] [10788] INFO  -> Package file was opened successfully
+[17/07/2026 01:24:30] [10788] INFO  -> Loading assembly from "assembly.xml"
+[17/07/2026 01:24:30] [10788] INFO  -> Reading assembly file "assembly.xml"
+[17/07/2026 01:24:30] [10788] INFO  -> Format version: "2.0"
+[17/07/2026 01:24:30] [10788] INFO  -> Package info class: "TPackageInfo20"
+[17/07/2026 01:24:30] [10788] INFO  -> Reading package info
+[17/07/2026 01:24:30] [10788] INFO  -> Package ID: "{CB78FDF1-CE6D-4B0A-9BB8-8103E5094391}"
+[17/07/2026 01:24:30] [10788] INFO  -> Package target: "Five"
+[17/07/2026 01:24:30] [10788] INFO  -> Package name: "Install NaturalVision Advanced"
+[17/07/2026 01:24:30] [10788] INFO  -> Package version: "2.0"
+[17/07/2026 01:24:30] [10788] INFO  -> Package author: "MonsterzFleet"
+[17/07/2026 01:24:30] [10788] ERROR -> The "footerLink" attribute is not found in node "metadata>description"
+[17/07/2026 01:24:30] [10788] INFO  -> Package contains changes for RPF archives
+[17/07/2026 01:24:30] [10788] INFO  -> Package format supports "mods" folder
+[17/07/2026 01:24:30] [10788] INFO  -> Loading package icon from "icon.png"
+[17/07/2026 01:24:30] [10788] INFO  -> Package loaded successfully
+[17/07/2026 01:24:51] [2976] INFO  -> Current package have only one content to install
+[17/07/2026 01:24:51] [2976] INFO  -> The "mods" folder supported by current game.
+[17/07/2026 01:24:51] [2976] INFO  -> Show install options dialog before installation
+[17/07/2026 01:24:51] [2976] INFO  -> Show confirm install dialog before installation
+[17/07/2026 01:24:51] [2976] INFO  -> Begin installation
+[17/07/2026 01:24:51] [2976] INFO  -> No other running installation found
+[17/07/2026 01:24:41] [5848] INFO  -> Install options
+									{
+										Content Index: "-1"
+										Use "mods" Folder: "True"
+									}
+[17/07/2026 01:24:41] [5848] INFO  -> Package installer class: "TPackageInstaller20"
+[17/07/2026 01:24:41] [5848] INFO  -> Validate content files
+[17/07/2026 01:24:41] [5848] INFO  -> Validate content files SUCCEEDED
+[17/07/2026 01:24:41] [5848] INFO  -> Installation
+[17/07/2026 01:24:41] [5848] INFO  -> Process ARCHIVE "GTA V" with path "C:\Grand Theft Auto V\"
+[17/07/2026 01:24:41] [5848] INFO  -> ARCHIVE "update\update.rpf" is exists
+[17/07/2026 01:24:41] [5848] INFO  -> Copying ARCHIVE "update\update.rpf" into "mods" folder
+[17/07/2026 01:24:42] [5848] INFO  -> Process ARCHIVE "update.rpf" with path "C:\Grand Theft Auto V\mods\update\update.rpf"
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/timecycle_mods_1.xml"
+										Destination: "common\data\timecycle\timecycle_mods_1.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/timecycle_mods_2.xml"
+										Destination: "common\data\timecycle\timecycle_mods_2.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/timecycle_mods_3.xml"
+										Destination: "common\data\timecycle\timecycle_mods_3.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/timecycle_mods_4.xml"
+										Destination: "common\data\timecycle\timecycle_mods_4.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/underwater_deep.xml"
+										Destination: "common\data\timecycle\underwater_deep.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/w_blizzard.xml"
+										Destination: "common\data\timecycle\w_blizzard.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/w_clear.xml"
+										Destination: "common\data\timecycle\w_clear.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/w_clearing.xml"
+										Destination: "common\data\timecycle\w_clearing.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/w_clouds.xml"
+										Destination: "common\data\timecycle\w_clouds.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/w_extrasunny.xml"
+										Destination: "common\data\timecycle\w_extrasunny.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/w_foggy.xml"
+										Destination: "common\data\timecycle\w_foggy.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/w_halloween.xml"
+										Destination: "common\data\timecycle\w_halloween.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/w_neutral.xml"
+										Destination: "common\data\timecycle\w_neutral.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/w_overcast.xml"
+										Destination: "common\data\timecycle\w_overcast.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/w_rain.xml"
+										Destination: "common\data\timecycle\w_rain.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/w_smog.xml"
+										Destination: "common\data\timecycle\w_smog.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/w_snow.xml"
+										Destination: "common\data\timecycle\w_snow.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/w_snowlight.xml"
+										Destination: "common\data\timecycle\w_snowlight.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/w_thunder.xml"
+										Destination: "common\data\timecycle\w_thunder.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/timecycle/w_xmas.xml"
+										Destination: "common\data\timecycle\w_xmas.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> ARCHIVE "update.rpf" processed
+[17/07/2026 01:24:42] [5848] INFO  -> ARCHIVE "update\update.rpf" is exists
+[17/07/2026 01:24:42] [5848] INFO  -> ARCHIVE "update\update.rpf" is already in the "mods" folder
+[17/07/2026 01:24:42] [5848] INFO  -> Process ARCHIVE "update.rpf" with path "C:\Grand Theft Auto V\mods\update\update.rpf"
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/cloudkeyframes.xml"
+										Destination: "common\data\cloudkeyframes.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/hbaosettings.xml"
+										Destination: "common\data\hbaosettings.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/lensflare_f.xml"
+										Destination: "common\data\lensflare_f.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/lensflare_m.xml"
+										Destination: "common\data\lensflare_m.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/lensflare_t.xml"
+										Destination: "common\data\lensflare_t.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/visualsettings.dat"
+										Destination: "common\data\visualsettings.dat"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> ARCHIVE "update.rpf" processed
+[17/07/2026 01:24:42] [5848] INFO  -> ARCHIVE "update\update.rpf" is exists
+[17/07/2026 01:24:42] [5848] INFO  -> ARCHIVE "update\update.rpf" is already in the "mods" folder
+[17/07/2026 01:24:42] [5848] INFO  -> Process ARCHIVE "update.rpf" with path "C:\Grand Theft Auto V\mods\update\update.rpf"
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/effects/explosionfx.dat"
+										Destination: "common\data\effects\explosionfx.dat"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/effects/wheelfx.dat"
+										Destination: "common\data\effects\wheelfx.dat"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:42] [5848] INFO  -> ARCHIVE "update.rpf" processed
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update\update.rpf" is exists
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update\update.rpf" is already in the "mods" folder
+[17/07/2026 01:24:43] [5848] INFO  -> Process ARCHIVE "update.rpf" with path "C:\Grand Theft Auto V\mods\update\update.rpf"
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/countryside_render_ground.xml"
+										Destination: "common\data\levels\gta5\weather\countryside_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/desert_render_ground.xml"
+										Destination: "common\data\levels\gta5\weather\desert_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/desert_render_ground_heavy.xml"
+										Destination: "common\data\levels\gta5\weather\desert_render_ground_heavy.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/firefly_render_drop.xml"
+										Destination: "common\data\levels\gta5\weather\firefly_render_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/fog_render_ground.xml"
+										Destination: "common\data\levels\gta5\weather\fog_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/lake_fog_render_drop.xml"
+										Destination: "common\data\levels\gta5\weather\lake_fog_render_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/lake_fog_render_ground.xml"
+										Destination: "common\data\levels\gta5\weather\lake_fog_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/pollen_render_drop.xml"
+										Destination: "common\data\levels\gta5\weather\pollen_render_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/rainstorm_render_drop.xml"
+										Destination: "common\data\levels\gta5\weather\rainstorm_render_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/rainstorm_render_ground.xml"
+										Destination: "common\data\levels\gta5\weather\rainstorm_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/rainstorm_render_mist.xml"
+										Destination: "common\data\levels\gta5\weather\rainstorm_render_mist.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/thunder_render_ground.xml"
+										Destination: "common\data\levels\gta5\weather\thunder_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/woodland_mist_render_ground.xml"
+										Destination: "common\data\levels\gta5\weather\woodland_mist_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/clearing_render_ground.xml"
+										Destination: "common\data\levels\gta5\weather\clearing_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/desert_emitter_ground.xml"
+										Destination: "common\data\levels\gta5\weather\desert_emitter_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/desert_emitter_ground_heavy.xml"
+										Destination: "common\data\levels\gta5\weather\desert_emitter_ground_heavy.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/snowheavy_emitter_ground.xml"
+										Destination: "common\data\levels\gta5\weather\snowheavy_emitter_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/snowheavy_render_ground.xml"
+										Destination: "common\data\levels\gta5\weather\snowheavy_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/thunder_emitter_drop.xml"
+										Destination: "common\data\levels\gta5\weather\thunder_emitter_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather/thunder_render_drop.xml"
+										Destination: "common\data\levels\gta5\weather\thunder_render_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update.rpf" processed
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update\update.rpf" is exists
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update\update.rpf" is already in the "mods" folder
+[17/07/2026 01:24:43] [5848] INFO  -> Process ARCHIVE "update.rpf" with path "C:\Grand Theft Auto V\mods\update\update.rpf"
+[17/07/2026 01:24:43] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/weather.xml"
+										Destination: "common\data\levels\gta5\weather.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update.rpf" processed
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update\update.rpf" is exists
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update\update.rpf" is already in the "mods" folder
+[17/07/2026 01:24:43] [5848] INFO  -> Process ARCHIVE "update.rpf" with path "C:\Grand Theft Auto V\mods\update\update.rpf"
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/levels/gta5/levels/water.xml"
+										Destination: "common\data\levels\gta5\levels\water.xml"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update.rpf" processed
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update\update.rpf" is exists
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update\update.rpf" is already in the "mods" folder
+[17/07/2026 01:24:43] [5848] INFO  -> Process ARCHIVE "update.rpf" with path "C:\Grand Theft Auto V\mods\update\update.rpf"
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update.rpf" processed
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update\update.rpf" is exists
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update\update.rpf" is already in the "mods" folder
+[17/07/2026 01:24:43] [5848] INFO  -> Process ARCHIVE "update.rpf" with path "C:\Grand Theft Auto V\mods\update\update.rpf"
+[17/07/2026 01:24:43] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/x64/data/effects/vfxvehicleinfo.ymt"
+										Destination: "x64\data\effects\vfxvehicleinfo.ymt"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update.rpf" processed
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update\update.rpf" is exists
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update\update.rpf" is already in the "mods" folder
+[17/07/2026 01:24:43] [5848] INFO  -> Process ARCHIVE "update.rpf" with path "C:\Grand Theft Auto V\mods\update\update.rpf"
+[17/07/2026 01:24:43] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/x64/textures/graphics.ytd"
+										Destination: "x64\textures\graphics.ytd"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/x64/textures/skydome.ytd"
+										Destination: "x64\textures\skydome.ytd"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/x64/textures/frontend.ytd"
+										Destination: "x64\textures\frontend.ytd"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/update/update.rpf/x64/textures/fxweather.ytd"
+										Destination: "x64\textures\fxweather.ytd"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/x64/textures/fxdecal.ytd"
+										Destination: "x64\textures\fxdecal.ytd"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update.rpf" processed
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update\update.rpf" is exists
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update\update.rpf" is already in the "mods" folder
+[17/07/2026 01:24:43] [5848] INFO  -> Process ARCHIVE "update.rpf" with path "C:\Grand Theft Auto V\mods\update\update.rpf"
+[17/07/2026 01:24:43] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/x64/data/carcols.ymt"
+										Destination: "x64\data\carcols.ymt"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "update.rpf" processed
+[17/07/2026 01:24:43] [5848] INFO  -> ARCHIVE "x64e.rpf" is exists
+[17/07/2026 01:24:43] [5848] INFO  -> Copying ARCHIVE "x64e.rpf" into "mods" folder
+[17/07/2026 01:24:45] [5848] INFO  -> Process ARCHIVE "x64e.rpf" with path "C:\Grand Theft Auto V\mods\x64e.rpf"
+[17/07/2026 01:24:45] [5848] INFO  -> ARCHIVE "levels\gta5\vehicles.rpf" is exists
+[17/07/2026 01:24:45] [5848] INFO  -> Process ARCHIVE "vehicles.rpf" with path "C:\Grand Theft Auto V\mods\x64e.rpf|levels\gta5\vehicles.rpf"
+[17/07/2026 01:24:45] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/x64e.rpf/vehshare.ytd"
+										Destination: "vehshare.ytd"
+										Archive: "C:\Grand Theft Auto V\mods\x64e.rpf|levels\gta5\vehicles.rpf"
+									}
+[17/07/2026 01:24:45] [5848] INFO  -> ARCHIVE "vehicles.rpf" processed
+[17/07/2026 01:24:45] [5848] INFO  -> ARCHIVE "x64e.rpf" processed
+[17/07/2026 01:24:45] [5848] INFO  -> ARCHIVE "common.rpf" is exists
+[17/07/2026 01:24:45] [5848] INFO  -> Copying ARCHIVE "common.rpf" into "mods" folder
+[17/07/2026 01:24:46] [5848] INFO  -> Process ARCHIVE "common.rpf" with path "C:\Grand Theft Auto V\mods\common.rpf"
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/watertune.xml"
+										Destination: "data\watertune.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/clouds.xml"
+										Destination: "data\clouds.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/common.rpf/data/water.xml"
+										Destination: "data\water.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/branchbend_windsettings.xml"
+										Destination: "data\branchbend_windsettings.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/grasslodsettings.xml"
+										Destination: "data\grasslodsettings.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/grassshadowlodsettings.xml"
+										Destination: "data\grassshadowlodsettings.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/effects/firefx.dat"
+										Destination: "data\effects\firefx.dat"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/countryside_render_ground.xml"
+										Destination: "data\levels\gta5\weather\countryside_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/countryside_emitter_ground.xml"
+										Destination: "data\levels\gta5\weather\countryside_emitter_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/desert_render_ground.xml"
+										Destination: "data\levels\gta5\weather\desert_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/desert_render_ground_heavy.xml"
+										Destination: "data\levels\gta5\weather\desert_render_ground_heavy.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/firefly_render_drop.xml"
+										Destination: "data\levels\gta5\weather\firefly_render_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/firefly_emitter_drop.xml"
+										Destination: "data\levels\gta5\weather\firefly_emitter_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/fly_render_drop.xml"
+										Destination: "data\levels\gta5\weather\fly_render_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/fly_emitter_drop.xml"
+										Destination: "data\levels\gta5\weather\fly_emitter_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/lake_fog_emitter_drop.xml"
+										Destination: "data\levels\gta5\weather\lake_fog_emitter_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/lake_fog_emitter_ground.xml"
+										Destination: "data\levels\gta5\weather\lake_fog_emitter_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/pollen_emitter_drop.xml"
+										Destination: "data\levels\gta5\weather\pollen_emitter_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/rainstorm_emitter_drop.xml"
+										Destination: "data\levels\gta5\weather\rainstorm_emitter_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/rainstorm_emitter_ground.xml"
+										Destination: "data\levels\gta5\weather\rainstrom_emitter_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/rainstorm_emitter_mist.xml"
+										Destination: "data\levels\gta5\weather\rainstorm_emitter_mist.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/thunder_emitter_ground.xml"
+										Destination: "data\levels\gta5\weather\thunder_emitter_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/thunder_emitter_mist.xml"
+										Destination: "data\levels\gta5\weather\thunder_emitter_mist.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/thunder_render_mist.xml"
+										Destination: "data\levels\gta5\weather\thunder_render_mist.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/snowheavy_emitter_drop.xml"
+										Destination: "data\levels\gta5\weather\snowheavy_emitter_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/snowheavy_render_drop.xml"
+										Destination: "data\levels\gta5\weather\snowheavy_render_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/snowheavy_emitter_mist.xml"
+										Destination: "data\levels\gta5\weather\snowheavy_emitter_mist.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/snowheavy_render_mist.xml"
+										Destination: "data\levels\gta5\weather\snowheavy_render_mist.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/snowlight_render_drop.xml"
+										Destination: "data\levels\gta5\weather\snowlight_render_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/snowlight_emitter_drop.xml"
+										Destination: "data\levels\gta5\weather\snowlight_emitter_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/woodland_mist_emitter_ground.xml"
+										Destination: "data\levels\gta5\weather\woodland_mist_emitter_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/urban_dust_emitter_drop.xml"
+										Destination: "data\levels\gta5\weather\urban_dust_emitter_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/urban_dust_render_drop.xml"
+										Destination: "data\levels\gta5\weather\urban_dust_render_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/fog_emitter_ground.xml"
+										Destination: "data\levels\gta5\weather\fog_emitter_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/fog_render_ground.xml"
+										Destination: "data\levels\gta5\weather\fog_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/blizzard_render_mist.xml"
+										Destination: "data\levels\gta5\weather\blizzard_render_mist.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/blizzard_emitter_mist.xml"
+										Destination: "data\levels\gta5\weather\blizzard_emitter_mist.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/blizzard_render_ground.xml"
+										Destination: "data\levels\gta5\weather\blizzard_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/blizzard_emitter_ground.xml"
+										Destination: "data\levels\gta5\weather\blizzard_emitter_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/blizzard_render_drop.xml"
+										Destination: "data\levels\gta5\weather\blizzard_render_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/blizzard_emitter_drop.xml"
+										Destination: "data\levels\gta5\weather\blizzard_emitter_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/underwater_render_mist.xml"
+										Destination: "data\levels\gta5\weather\underwater_render_mist.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/underwater_emitter_mist.xml"
+										Destination: "data\levels\gta5\weather\underwater_emitter_mist.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/underwater_emitter_drop.xml"
+										Destination: "data\levels\gta5\weather\underwater_emitter_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/underwater_render_drop.xml"
+										Destination: "data\levels\gta5\weather\underwater_render_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/fog_render_ground.xml"
+										Destination: "data\levels\gta5\weather\fog_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/lake_fog_render_drop.xml"
+										Destination: "data\levels\gta5\weather\lake_fog_render_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/lake_fog_render_ground.xml"
+										Destination: "data\levels\gta5\weather\lake_fog_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/pollen_render_drop.xml"
+										Destination: "data\levels\gta5\weather\pollen_render_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/rainstorm_render_drop.xml"
+										Destination: "data\levels\gta5\weather\rainstorm_render_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/rainstorm_render_ground.xml"
+										Destination: "data\levels\gta5\weather\rainstorm_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/rainstorm_render_mist.xml"
+										Destination: "data\levels\gta5\weather\rainstorm_render_mist.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/thunder_render_ground.xml"
+										Destination: "data\levels\gta5\weather\thunder_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/woodland_mist_render_ground.xml"
+										Destination: "data\levels\gta5\weather\woodland_mist_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/desert_emitter_ground.xml"
+										Destination: "data\levels\gta5\weather\desert_emitter_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/desert_emitter_ground_heavy.xml"
+										Destination: "data\levels\gta5\weather\desert_emitter_ground_heavy.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/snowheavy_emitter_ground.xml"
+										Destination: "data\levels\gta5\weather\snowheavy_emitter_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/snowheavy_render_ground.xml"
+										Destination: "data\levels\gta5\weather\snowheavy_render_ground.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/thunder_emitter_drop.xml"
+										Destination: "data\levels\gta5\weather\thunder_emitter_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/common.rpf/data/levels/gta5/weather/thunder_render_drop.xml"
+										Destination: "data\levels\gta5\weather\thunder_render_drop.xml"
+										Archive: "C:\Grand Theft Auto V\mods\common.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> ARCHIVE "common.rpf" processed
+[17/07/2026 01:24:46] [5848] INFO  -> ARCHIVE "x64a.rpf" is exists
+[17/07/2026 01:24:46] [5848] INFO  -> Copying ARCHIVE "x64a.rpf" into "mods" folder
+[17/07/2026 01:24:46] [5848] INFO  -> Process ARCHIVE "x64a.rpf" with path "C:\Grand Theft Auto V\mods\x64a.rpf"
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/x64a.rpf/textures/graphics.ytd"
+										Destination: "textures\graphics.ytd"
+										Archive: "C:\Grand Theft Auto V\mods\x64a.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/x64a.rpf/textures/water.ytd"
+										Destination: "textures\water.ytd"
+										Archive: "C:\Grand Theft Auto V\mods\x64a.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/x64a.rpf/textures/fxweather.ytd"
+										Destination: "textures\fxweather.ytd"
+										Archive: "C:\Grand Theft Auto V\mods\x64a.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/x64a.rpf/data/hdaosettings.xml"
+										Destination: "data\hdaosettings.xml"
+										Archive: "C:\Grand Theft Auto V\mods\x64a.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> Add file into archive
+									{
+										Source: "content/rpf/x64a.rpf/data/terraintessellation.xml"
+										Destination: "data\terraintessalation.xml"
+										Archive: "C:\Grand Theft Auto V\mods\x64a.rpf"
+									}
+[17/07/2026 01:24:46] [5848] INFO  -> ARCHIVE "x64a.rpf" processed
+[17/07/2026 01:24:46] [5848] INFO  -> ARCHIVE "update\update.rpf" is exists
+[17/07/2026 01:24:46] [5848] INFO  -> ARCHIVE "update\update.rpf" is already in the "mods" folder
+[17/07/2026 01:24:46] [5848] INFO  -> Process ARCHIVE "update.rpf" with path "C:\Grand Theft Auto V\mods\update\update.rpf"
+[17/07/2026 01:24:46] [5848] INFO  -> ARCHIVE "x64\patch\data\effects\ptfx.rpf" is exists
+[17/07/2026 01:24:46] [5848] INFO  -> Process ARCHIVE "ptfx.rpf" with path "C:\Grand Theft Auto V\mods\update\update.rpf|x64\patch\data\effects\ptfx.rpf"
+[17/07/2026 01:24:46] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/core.ypt"
+										Destination: "core.ypt"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf|x64\patch\data\effects\ptfx.rpf"
+									}
+[17/07/2026 01:24:47] [5848] INFO  -> ARCHIVE "ptfx.rpf" processed
+[17/07/2026 01:24:47] [5848] INFO  -> ARCHIVE "update.rpf" processed
+[17/07/2026 01:24:47] [5848] INFO  -> ARCHIVE "update\update.rpf" is exists
+[17/07/2026 01:24:47] [5848] INFO  -> ARCHIVE "update\update.rpf" is already in the "mods" folder
+[17/07/2026 01:24:47] [5848] INFO  -> Process ARCHIVE "update.rpf" with path "C:\Grand Theft Auto V\mods\update\update.rpf"
+[17/07/2026 01:24:47] [5848] INFO  -> ARCHIVE "x64\patch\data\effects\ptfx_lo.rpf" is exists
+[17/07/2026 01:24:47] [5848] INFO  -> Process ARCHIVE "ptfx_lo.rpf" with path "C:\Grand Theft Auto V\mods\update\update.rpf|x64\patch\data\effects\ptfx_lo.rpf"
+[17/07/2026 01:24:47] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/core.ypt"
+										Destination: "core.ypt"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf|x64\patch\data\effects\ptfx_lo.rpf"
+									}
+[17/07/2026 01:24:47] [5848] INFO  -> ARCHIVE "ptfx_lo.rpf" processed
+[17/07/2026 01:24:47] [5848] INFO  -> ARCHIVE "update.rpf" processed
+[17/07/2026 01:24:47] [5848] INFO  -> ARCHIVE "update\update.rpf" is exists
+[17/07/2026 01:24:47] [5848] INFO  -> ARCHIVE "update\update.rpf" is already in the "mods" folder
+[17/07/2026 01:24:47] [5848] INFO  -> Process ARCHIVE "update.rpf" with path "C:\Grand Theft Auto V\mods\update\update.rpf"
+[17/07/2026 01:24:47] [5848] INFO  -> ARCHIVE "x64\patch\data\effects\ptfx_hi.rpf" is exists
+[17/07/2026 01:24:47] [5848] INFO  -> Process ARCHIVE "ptfx_hi.rpf" with path "C:\Grand Theft Auto V\mods\update\update.rpf|x64\patch\data\effects\ptfx_hi.rpf"
+[17/07/2026 01:24:47] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/core.ypt"
+										Destination: "core.ypt"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf|x64\patch\data\effects\ptfx_hi.rpf"
+									}
+[17/07/2026 01:24:47] [5848] INFO  -> ARCHIVE "ptfx_hi.rpf" processed
+[17/07/2026 01:24:47] [5848] INFO  -> ARCHIVE "update.rpf" processed
+[17/07/2026 01:24:47] [5848] INFO  -> ARCHIVE "update\update.rpf" is exists
+[17/07/2026 01:24:47] [5848] INFO  -> ARCHIVE "update\update.rpf" is already in the "mods" folder
+[17/07/2026 01:24:47] [5848] INFO  -> Process ARCHIVE "update.rpf" with path "C:\Grand Theft Auto V\mods\update\update.rpf"
+[17/07/2026 01:24:47] [5848] INFO  -> Replace file in archive
+									{
+										Source: "content/rpf/update/update.rpf/common/data/materials/materials.dat"
+										Destination: "common\data\materials\materials.dat"
+										Archive: "C:\Grand Theft Auto V\mods\update\update.rpf"
+									}
+[17/07/2026 01:24:47] [5848] INFO  -> ARCHIVE "update.rpf" processed
+[17/07/2026 01:24:47] [5848] INFO  -> ARCHIVE "GTA V" processed
+[17/07/2026 01:24:47] [5848] INFO  -> Installation SUCCEEDED
