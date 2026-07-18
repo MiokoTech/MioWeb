@@ -1,5 +1,8 @@
 # MioNova
 
+- **Official Website:** [mionova.xyz](https://mionova.xyz)
+- **Download for Windows:** [MioNova-Setup.exe](https://github.com/MiokoTech/MioWeb/releases/download/latest/MioNova-Setup.exe)
+
 **MioNova** is a Windows desktop app for creators who want to turn TikTok Live interaction into real-time game events.
 
 Viewer gifts, likes, follows, and comments can trigger in-game actions, overlay animations, sound alerts, text-to-speech, and automation hooks without forcing the streamer to leave the game.
@@ -31,11 +34,7 @@ Typical use cases include:
 
 ## Download
 
-Download the latest Windows installer from the latest release:
-
-```text
-https://github.com/MiokoTech/MioWeb/releases/download/latest/MioNova-Setup.exe
-```
+Download the latest Windows installer: [MioNova-Setup.exe](https://github.com/MiokoTech/MioWeb/releases/download/latest/MioNova-Setup.exe)
 
 The app is intended for Windows 10/11 64-bit.
 
@@ -47,11 +46,7 @@ For Steam users playing modded GTA V Story Mode, disable BattlEye before launchi
 
 ## Website
 
-Official website:
-
-```text
-https://mionova.xyz
-```
+Official website: [mionova.xyz](https://mionova.xyz)
 
 The website contains pricing, download instructions, feature details, FAQ, and user-facing documentation.
 
@@ -60,4 +55,3 @@ The website contains pricing, download instructions, feature details, FAQ, and u
 This repository is used as the public-facing release hub for MioNova desktop builds and release assets. The main application, backend, worker, and installer source code live in separate private development repositories.
 
 Do not commit generated deployment artifacts, installers, local build output, or machine-specific state into this repository.
-
